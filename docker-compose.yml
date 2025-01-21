@@ -1,0 +1,25 @@
+
+
+services:
+  bot:
+      build: .
+      image: msavebot:alpine
+      container_name: msavebot_con
+      restart: always
+      command: sh -c "python3 main.py"
+      depends_on:
+        - mpg
+  mpg:
+    image: postgres:alpine
+    container_name: m_pg
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 1
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+
+volumes:
+  pg_data:
+
+
